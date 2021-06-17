@@ -18,20 +18,21 @@ class Interfaz():
         
         
         #Combobox
-        self.usuarioC=ttk.Combobox(state="readonly")
-        self.usuarioC.place(x=30, y=50)
-        self.usuarioC["values"]= ["ETH-USD", "BTC-USD", "BCH-USD","LTC-USD"]
-        self.usuarioC.current(0)
+        #Operacion
+        self.opeC=ttk.Combobox(state="readonly")
+        self.opeC.place(x=30, y=50)
+        self.opeC["values"]= ["ETH-USD", "BTC-USD", "BCH-USD","LTC-USD"]
+        self.opeC.current(0)
         
         #Botones
         nextB=tk.Button(text="Adelante", height = 1, width = 16, command=self.adelante)
-        nextB.place(x=30, y=90)
+        nextB.place(x=40, y=90)
         
         
         ventana.mainloop()
 
     def adelante(self):
-        tp = TP(self.usuarioC.get())
+        tp = TP(self.opeC.get())
    
 def main():
         app = Interfaz()
