@@ -7,17 +7,22 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import datetime
-
+import threading
 
 class TermPredictor:
 
     def __init__(self, operation):
+
         self.operation = operation;
         self.app = dash.Dash(__name__)
         self.app.layout = self.serve_layout
-        # Show
+        # Show 
+        self.server=threading.Thread(target=self.run, name='Server')
+        self.server.daemon = True
+        self.server.start()
+
+    def run (self):
         self.app.run_server()
-        
 
     def serve_layout(self):
         colors = {
@@ -109,11 +114,9 @@ class TermPredictor:
             )
         )
         return html.Div(children=[
-            # All elements from the top of the page
             html.Div([
                 dcc.Graph(id="graph", figure=self.fig),
             ]),
-            # New Div for all elements in the new 'row' of the page
             html.Div([
                 dcc.Graph(id="grapho", figure=self.fig2),
             ]),
